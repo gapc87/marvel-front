@@ -34,7 +34,7 @@ export class HeroeComponent implements OnInit {
         this.image = `${hero['thumbnail']['path']}.${hero['thumbnail']['extension']}`;
         this.link = ['/heroe', hero['id']];
       } else {
-        this.image = `/assets/none.webp`;
+        this.image = `assets/none.webp`;
         this.link = ['/mi-equipo'];
       }
     });

@@ -61,7 +61,7 @@ export class HeroeComponent implements OnInit {
         this.heroForm.setValue(hero, { emitEvent: false });
         this.image = `background-image: url('${hero['thumbnail']['path']}.${hero['thumbnail']['extension']}');`;
       } else {
-        this.image = `background-image: url('/assets/none.webp');`;
+        this.image = `background-image: url('assets/none.webp');`;
       }
     });
 
