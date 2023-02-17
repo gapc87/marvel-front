@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="teamForm">
+            <div class="mb-3 mx-2">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" placeholder="Nombre de tu equipo" formControlName="name">
+            </div>
+            <div class="mb-3 mx-2">
+                <label for="description" class="form-label">Descripción</label>
+                <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-4 col-lg-2 text-center"  *ngFor="let hero of _marvelSrv.heroes | keyvalue">
+                    <app-heroe-of-team-page [hero_key]="hero.key">
+                    </app-heroe-of-team-page>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title text-white">Kubidevel</h4>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body justify-content-center align-items-center">
+    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <li class="nav-item text-white" *ngFor="let m of menu">
+        <a class="nav-link active" aria-current="page" [routerLink]="m.route">{{ m.name }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="d-grid mt-auto" *ngIf="isLoggedIn">
+    <button class="btn btn-danger rounded-0 btn-lg" (click)="logout()" type="submit">Cerrar sesión</button>
+  </div>
+</ng-template>
+
+<div class="wrapper" ngModule #wrapper (scroll)="onScrollEvent($event)">
+  <nav class="navbar navbar-dark bg-dark justify-content-center sticky-top" ngModel #navbar>
+    <a routerLink="/">
+      <img src="/assets/marvel.svg" alt="Marvel">
+    </a>
+    <div class="toggle">
+      <button class="navbar-toggler" type="button" (click)="openOffcanvas(content)">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <header>
+    <div class="hero-separator"></div>
+    <img src="/assets/hero-bg.jpg" class="background">
+    <div class="container col-12 px-4 py-5">
+      <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start text-light">
+          <h1 class="display-4 fw-bold lh-1 mb-5 mb-lg-3">Crea tu equipo de héroes</h1>
+          <p class="d-none d-lg-block col-lg-10 fs-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Veritatis repudiandae dolor ea architecto, unde laboriosam fugiat odit reprehenderit, dicta quam similique
+            doloremque libero repellat quod animi in mollitia dolorum. Assumenda.</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5">
+          <ng-container *ngIf="!isLoggedIn">
+            <app-login *ngIf="!authForm" (toggleComponent)="toggleAuthForm($event)"></app-login>
+            <app-register *ngIf="authForm" (toggleComponent)="toggleAuthForm($event)"></app-register>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="bg-white mt-n2">
+    <div class="container">
+      <div class="row flex-column-reverse flex-xl-row mx-auto">
+        <div class="col-xl-9 g-0">
+
+          <router-outlet></router-outlet>
+
+        </div>
+        <div class="col-xl-3 mb-3 g-3">
+          <app-equipo-component (toTopEvent)="toTop()"></app-equipo-component>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container-fluid bg-dark p-5 mt-3">
+    <p class="text-white text-center">Kubidevel</p>
+  </footer>
+</div>
+
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+<app-loader aria-live="polite" aria-atomic="true"></app-loader>

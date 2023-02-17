@@ -1,0 +1,53 @@
+<app-tabs>
+    <app-tab *ngFor="let tab of tabs" [tabTitle]="tab.name">
+        <ng-container *ngTemplateOutlet="tab.outlet; context: {$implicit: tab.items}">
+        </ng-container>
+    </app-tab>
+</app-tabs>
+
+<ng-template let-tab #template1>
+    <h1>{{ tab[0].name }}</h1>
+    <p>{{ tab[0].description }}</p>
+    <hr>
+    <h4>Cómics en los que aparece</h4>
+    <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide *ngFor="let img of images">
+            <div class="picsum-img-wrapper">
+                <img class="img-fluid d-block mx-auto" [src]="img | thumbnail" [alt]="tab[0].name" />
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</ng-template>
+
+<ng-template let-tab #template2>
+    <div class="row">
+        <div class="col-12 col-md-7">
+            <div class="list-group">
+                <button *ngFor="let t of tab" type="button" class="list-group-item list-group-item-action"
+                    (click)="getData(t.resourceURI)">
+                    {{ t.name }}
+                </button>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
+            <span *ngIf="sourceEmpty; else sourceContent" class="text-center">
+                <p>Seleccione un recurso de la lista para visualizar las imágenes.</p>
+            </span>
+            <ng-template #sourceContent>
+                <img class="img-fluid align-self-start" [src]="switchResource?.thumbnail | thumbnail" [alt]="comic.title">
+            </ng-template>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template let-tab #template3>
+    <div class="row">
+        <div class="col-12">
+            <div class="list-group">
+                <a *ngFor="let t of tab" [href]="t.url" target="_blank" class="list-group-item list-group-item-action">
+                    {{ t.type }}
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,30 @@
+<input type="checkbox" [id]="'card-' + i" />
+<label class="card-container" [for]="'card-' + i">
+    <div class="card-flip">
+        <!-- Card 1 Front -->
+        <div class="card front cursor-pointer">
+            <div class="card-header mb-3">{{ name }}</div>
+            <div class="card-body">
+                <p class="card-text" *ngIf="!!description">{{ description }}</p>
+                <p class="card-text"><small class="text-muted">{{ modified | date }}</small></p>
+            </div>
+            <img class="img-fluid" [src]="thumbnail | thumbnail" />
+        </div>
+        <!-- End Card 1 Front -->
+
+        <!-- Card 1 Back -->
+        <div class="card back">
+            <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center"
+                [style]="backBackground">
+                <h4
+                    class="bg-dark bg-gradient d-block w-100 position-absolute top-0 rounded-top text-center text-white p-4 mb-3">
+                    {{ name }}</h4>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success btn-lg mb-3">A mi equipo!</button>
+                    <button type="button" [routerLink]="['/heroe', i]" class="btn btn-secondary btn-lg">Ver</button>
+                </div>
+            </div>
+        </div>
+        <!-- End Card 1 Back -->
+    </div>
+</label>

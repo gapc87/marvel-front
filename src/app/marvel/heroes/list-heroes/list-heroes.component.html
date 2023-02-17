@@ -1,0 +1,23 @@
+<div class="px-2 mb-3">
+    <label for="typeahead-http" class="col-xs-3 col-sm-auto col-form-label">Encuentra tu héroe favorito:</label>
+    <div class="col">
+        <input id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed"
+            [(ngModel)]="model" [ngbTypeahead]="search" [inputFormatter]="formatter" placeholder="Hulk" />
+        <small *ngIf="searching" class="form-text text-muted">buscando...</small>
+        <div class="invalid-feedback" *ngIf="searchFailed">Lo sentimos, no se han podido cargar las sugerencias.
+        </div>
+    </div>
+</div>
+
+<ngx-masonry>
+    <div class="row g-0" infiniteScroll infiniteScrollContainer=".wrapper" [infiniteScrollDistance]="2"
+        [infiniteScrollUpDistance]="1.5" [infiniteScrollThrottle]="50" (scrolled)="getHeroes()" [scrollWindow]="false"
+        [fromRoot]="true">
+        <div ngxMasonryItem class="masonry-item col-12 col-md-6 mb-3" *ngFor="let heroe of heroes">
+            <app-heroe-component [i]="heroe?.id" [name]="heroe?.name" [description]="heroe?.description"
+                [modified]="heroe?.modified" [thumbnail]="heroe?.thumbnail"
+                [backBackground]="'background-image: url(' + heroe?.thumbnail?.path + '.' + heroe?.thumbnail?.extension + ');'">
+            </app-heroe-component>
+        </div>
+    </div>
+</ngx-masonry>

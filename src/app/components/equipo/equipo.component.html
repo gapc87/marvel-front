@@ -1,0 +1,19 @@
+<div class="card sticky-top v-center">
+    <div class="card-header">
+        Tu equipo
+    </div>
+    <div class="card-body team">
+        <ng-container *ngIf="!isLoggedIn; else teamTmp">
+            <p class="card-text">Inicia sesión para ver y gestionar a tu equipo.</p>
+            <button type="button" (click)="toTop()" class="btn btn-primary">Iniciar sesión</button>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #teamTmp>
+    <ul>
+        <li *ngFor="let heroe of _marvelSrv.heroes | keyvalue">
+            <app-heroe-for-nav [hero_key]="heroe.key"></app-heroe-for-nav>
+        </li>
+    </ul>
+</ng-template>
